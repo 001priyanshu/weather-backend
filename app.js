@@ -4,21 +4,20 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const dotenv = require("dotenv");
+const port = process.env.PORT || 8080;
+
 
 app.use(cors());
-
-
-app.set('view engine', 'ejs');
-
-
-app.use(express.static('public'));
-
-
+dotenv.config();
 app.use(bodyParser.json());
 
 
 
 app.use('/weather', require('./routes/wheather'));
 
-const port =process.env.PORT || 5000;
+app.get("/", (req,res)=>{
+    res.send("Express backend");
+})
+
 app.listen(port, () => console.log(`Server listening on port ${port}`));
